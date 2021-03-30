@@ -4,3 +4,4 @@ geckodriver.log
 goat
 __pycache__
 *.pyc
+*.swp
