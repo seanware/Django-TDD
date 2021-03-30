@@ -40,14 +40,22 @@ class NewVisitorTest(unittest.TestCase):
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-            any(row.text == '1: Complete google classwork' for row in rows),
-            "New to-do item did not appear in table"
-            )
+        self.assertIn('1: Complete google classwork', [row.text for row in rows])
 
 # A text box exists allowing him to add another item
 # He enters complete essay for Civics about the 
 # US constitution
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        
+        inputbox.send_keys("Finish US Constitution essay")
+
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
+
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+
+        self.assertIn('2: Finish US Constitution essay', [row.text for row in rows])
         self.fail('Finish the test!')
 
 # The page updates and now both items are on the list
