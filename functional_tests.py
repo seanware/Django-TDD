@@ -12,6 +12,11 @@ class NewVisitorTest(unittest.TestCase):
 
     def tearDown(self):
         self.browser.quit()
+
+    def check_for_row_in_list_table(self, row_text):
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn(row_text, [row.text for row in rows])
         
     def test_can_start_a_list_and_retrive_it_later(self):
 
@@ -37,25 +42,19 @@ class NewVisitorTest(unittest.TestCase):
 # 1: Finish google classroom assignment
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
+        self.check_for_row_in_list_table('1: Complete google classwork')
 
-        table = self.browser.find_element_by_id('id_list_table')
-        rows = table.find_elements_by_tag_name('tr')
-        self.assertIn('1: Complete google classwork', [row.text for row in rows])
 
 # A text box exists allowing him to add another item
 # He enters complete essay for Civics about the 
 # US constitution
         inputbox = self.browser.find_element_by_id('id_new_item')
-        
         inputbox.send_keys("Finish US Constitution essay")
-
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
 
-        table = self.browser.find_element_by_id('id_list_table')
-        rows = table.find_elements_by_tag_name('tr')
-
-        self.assertIn('2: Finish US Constitution essay', [row.text for row in rows])
+        self.check_for_row_in_list_table('1: Complete google classwork')
+        self.check_for_row_in_list_table('2: Finish US Constitution essay')
         self.fail('Finish the test!')
 
 # The page updates and now both items are on the list
