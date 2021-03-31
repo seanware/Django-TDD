@@ -1,11 +1,11 @@
 
 
+from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
-import unittest
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -22,7 +22,7 @@ class NewVisitorTest(unittest.TestCase):
 
 # Kemarius found out about a new to-do list app. He goes
 # to the page
-        self.browser.get('http://localhost:8000')
+        self.browser.get(self.live_server_url)
 
 # The header mentions to-do in the page title
         self.assertIn('To-Do', self.browser.title)
@@ -65,5 +65,3 @@ class NewVisitorTest(unittest.TestCase):
 # Kemarius visits the URL and the list he made is still there
 
 # Now he goes back to playing video games
-if __name__ == '__main__':
-        unittest.main()
