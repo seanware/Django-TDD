@@ -91,7 +91,7 @@ class NewVisitorTest(LiveServerTestCase):
 # Jamia vists the home page. There is no sign on Kemarius's list
         self.browser.get(self.live_server_url)
         page_text = self.browser.find_element_by_tag_name('body').text
-        self.assertNotIN('Complete google classwork', page_text)
+        self.assertNotIn('Complete google classwork', page_text)
         self.assertNotIn('Finish US Constituion essay', page_text)
 
 # Jamia starts a new list by entering a new item
