@@ -107,7 +107,7 @@ class NewVisitorTest(LiveServerTestCase):
 
 # Again, there is no trace of Kemarius's list
         page_text = self.browser.find_element_by_tag_name('body').text
-        self.assetNotIn('Complete google classwork', page_text)
+        self.assertNotIn('Complete google classwork', page_text)
         self.assertIn("Buy flamin hot cheetos", page_text)
 
 # Satisfied, they both go back to sleep
