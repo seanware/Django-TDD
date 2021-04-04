@@ -5,3 +5,4 @@ goat
 __pycache__
 *.pyc
 *.swp
+/static
